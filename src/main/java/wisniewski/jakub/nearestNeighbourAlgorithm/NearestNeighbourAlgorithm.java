@@ -43,6 +43,22 @@ public class NearestNeighbourAlgorithm {
         return idx;
     }
 
+    public List<City> getUnvisitedCities() {
+        return unvisitedCities;
+    }
+
+    public void setUnvisitedCities(List<City> unvisitedCities) {
+        this.unvisitedCities = unvisitedCities;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
     @Override
     public String toString() {
         return "Distance: "+ route.getDistance();
