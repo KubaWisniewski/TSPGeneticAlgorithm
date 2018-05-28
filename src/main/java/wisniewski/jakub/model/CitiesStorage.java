@@ -18,14 +18,15 @@ public class CitiesStorage {
         cities = citiesStorage;
     }
 
-    public static City getCityByIdx(int idx){
+    public static City getCityByIdx(int idx) {
         return cities[idx];
     }
 
     public static City[] getCities() {
         return cities;
     }
-    public static void getCitiesFromFile(String fileName){
+
+    public static void getCitiesFromFile(String fileName) {
         sizeCityStorage=0;
         cities=new City[sizeCityStorage];
         File file = new File(fileName);
@@ -37,7 +38,6 @@ public class CitiesStorage {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public static Integer getSizeCityStorage() {

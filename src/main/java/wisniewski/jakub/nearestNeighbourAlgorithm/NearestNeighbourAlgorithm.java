@@ -1,4 +1,4 @@
-package wisniewski.jakub.NearestNeighbourAlgorithm;
+package wisniewski.jakub.nearestNeighbourAlgorithm;
 
 import wisniewski.jakub.model.CitiesStorage;
 import wisniewski.jakub.model.City;
@@ -17,26 +17,24 @@ public class NearestNeighbourAlgorithm {
         route=new Route();
     }
 
-    public void solveTSP(){
+    public void solveTSP() {
         int random=(int)( Math.random()*unvisitedCities.size());
         route.getRoute().set(0,unvisitedCities.get(random));
         unvisitedCities.remove(random);
         //route.getRoute().set(0,c);
         //unvisitedCities.remove(c);
         for (int i = 1; !unvisitedCities.isEmpty() ; i++) {
-
             int indexNearest =getIdxNearest(route.getRoute().get(i-1),unvisitedCities);
             route.getRoute().set(i,unvisitedCities.get(indexNearest));
             unvisitedCities.remove(indexNearest);
         }
-
         route.calculateRouteDistance();
     }
 
     public int getIdxNearest(City city, List<City> cities) {
         int idx=0;
         double distance=city.getDistanceTo(cities.get(0));
-        for (int i = 1; i <cities.size() ; i++) {
+        for (int i = 1; i <cities.size() ; i++){
             if (city.getDistanceTo(cities.get(i)) < distance) {
                 distance = city.getDistanceTo(cities.get(i));
                 idx = i;

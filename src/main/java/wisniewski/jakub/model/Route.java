@@ -7,7 +7,8 @@ public class Route {
     private List<City> route;
     private double distance;
     private int routeSize=CitiesStorage.getCities().length;
-    public Route(){
+
+    public Route() {
         route=new ArrayList<>();
         distance=0;
         for (int i = 0; i <routeSize ; i++) {
@@ -31,7 +32,7 @@ public class Route {
         this.distance = distance;
     }
 
-    public void calculateRouteDistance(){
+    public void calculateRouteDistance() {
         double distance=0;
         for (int i = 0; i <route.size()-1 ; i++) {
             distance+=route.get(i).getDistanceTo(route.get(i+1));

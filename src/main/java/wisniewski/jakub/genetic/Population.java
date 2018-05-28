@@ -1,4 +1,4 @@
-package wisniewski.jakub.Genetic;
+package wisniewski.jakub.genetic;
 
 import wisniewski.jakub.model.CitiesStorage;
 import wisniewski.jakub.model.City;
@@ -9,11 +9,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Population {
+public class Population{
     private List<Route> routes;
     private int populationSize;
 
-    public Population(int populationSize){
+    public Population(int populationSize) {
         this.populationSize=populationSize;
         routes=new ArrayList<>();
         for (int i = 0; i <populationSize ; i++) {
@@ -32,7 +32,6 @@ public class Population {
         }
     }
 
-
     public List<Route> getRoutes() {
         return routes;
     }
@@ -49,16 +48,12 @@ public class Population {
         this.populationSize = populationSize;
     }
 
-    public Route getBestRoute(){
+    public Route getBestRoute() {
         Route route=routes.get(0);
         for (int i = 0; i <populationSize ; i++) {
             if(routes.get(i).getDistance()<route.getDistance())
                 route=routes.get(i);
         }
         return route;
-
-
     }
-
-
 }

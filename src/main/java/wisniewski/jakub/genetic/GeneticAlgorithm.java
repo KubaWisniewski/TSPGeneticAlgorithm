@@ -1,4 +1,4 @@
-package wisniewski.jakub.Genetic;
+package wisniewski.jakub.genetic;
 
 import wisniewski.jakub.model.Route;
 
@@ -36,8 +36,7 @@ public class GeneticAlgorithm {
         this.elit = elit;
     }
 
-    public GeneticAlgorithm(double mutationRate, int tournamentSize, boolean elit)
-    {
+    public GeneticAlgorithm(double mutationRate, int tournamentSize, boolean elit) {
         this.mutationRate=mutationRate;
         this.tournamentSize=tournamentSize;
         this.elit=elit;
@@ -60,8 +59,8 @@ public class GeneticAlgorithm {
             mutate(population.getRoutes().get(i));
         }
         return population;
-
     }
+
     public Route crossover(Route r1, Route r2) {
         Route child = new Route();
         int rnd1 = (int) (Math.random() * r1.getRoute().size());
@@ -72,13 +71,11 @@ public class GeneticAlgorithm {
         for (int i = start; i < end; i++) {
             child.getRoute().set(i, r1.getRoute().get(i));
         }
-
         for (int i = 0; i < r2.getRoute().size(); i++) {
             if(!child.getRoute().contains(r2.getRoute().get(i)))
                 for (int j = 0; j < child.getRoute().size(); j++) {
                     if(child.getRoute().toArray()[j]==null) {
                         child.getRoute().set(j, r2.getRoute().get(i));
-
                         break;
                     }
                 }
@@ -86,9 +83,10 @@ public class GeneticAlgorithm {
         child.calculateRouteDistance();
         return child;
     }
+
     private void mutate(Route route){
         for (int i = 0; i < route.getRoute().size(); i++) {
-            if(Math.random()<mutationRate){
+            if(Math.random()<mutationRate) {
                 int j =(int) (Math.random()*route.getRoute().size());
                 Collections.swap(route.getRoute(),i,j);
             }
@@ -96,8 +94,7 @@ public class GeneticAlgorithm {
         route.calculateRouteDistance();
     }
 
-
-    private Route tournamentSelection(Population population){
+    private Route tournamentSelection(Population population) {
         Population tournamnetPopulation= new Population(tournamentSize);
         for (int i = 0; i <tournamentSize ; i++) {
             tournamnetPopulation.getRoutes().set(i,population.getRoutes().get((int)(Math.random()*population.getPopulationSize())));
@@ -106,10 +103,4 @@ public class GeneticAlgorithm {
         route.calculateRouteDistance();
         return route;
     }
-
-
-
-
-
-
 }
