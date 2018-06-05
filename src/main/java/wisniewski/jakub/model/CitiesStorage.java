@@ -5,13 +5,13 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class CitiesStorage {
-    private static Integer sizeCityStorage=0;
-    private static City[] cities=new City[sizeCityStorage];
+    private static Integer sizeCityStorage = 0;
+    private static City[] cities = new City[sizeCityStorage];
 
     public static void addCity(City city) {
         sizeCityStorage++;
         City[] citiesStorage = new City[sizeCityStorage];
-        for (int i = 0; i < sizeCityStorage-1; i++) {
+        for (int i = 0; i < sizeCityStorage - 1; i++) {
             citiesStorage[i] = cities[i];
         }
         citiesStorage[sizeCityStorage - 1] = city;
@@ -27,11 +27,11 @@ public class CitiesStorage {
     }
 
     public static void getCitiesFromFile(String fileName) {
-        sizeCityStorage=0;
-        cities=new City[sizeCityStorage];
+        sizeCityStorage = 0;
+        cities = new City[sizeCityStorage];
         File file = new File(fileName);
         try (Scanner scanner = new Scanner(file)) {
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 String[] s = scanner.nextLine().split(" ");
                 addCity(new City(Integer.parseInt(s[0]), Integer.parseInt(s[1])));
             }

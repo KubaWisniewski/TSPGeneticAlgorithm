@@ -5,9 +5,9 @@ import wisniewski.jakub.model.Route;
 import java.util.Collections;
 
 public class GeneticAlgorithm {
-    private double mutationRate=0.018;
-    private int tournamentSize=10;
-    private boolean elit=true;
+    private double mutationRate = 0.05;
+    private int tournamentSize = 10;
+    private boolean elit = false;
 
     public GeneticAlgorithm() {
     }
@@ -37,9 +37,9 @@ public class GeneticAlgorithm {
     }
 
     public GeneticAlgorithm(double mutationRate, int tournamentSize, boolean elit) {
-        this.mutationRate=mutationRate;
-        this.tournamentSize=tournamentSize;
-        this.elit=elit;
+        this.mutationRate = mutationRate;
+        this.tournamentSize = tournamentSize;
+        this.elit = elit;
     }
 
     public Population evolution(Population p) {
@@ -47,13 +47,13 @@ public class GeneticAlgorithm {
         int eliteIndx = 0;
         if (elit) {
             population.getRoutes().set(0, p.getBestRoute());
-            eliteIndx=1;
+            eliteIndx = 1;
         }
-        for (int i = eliteIndx; i <p.getPopulationSize(); i++) {
-            Route r1=tournamentSelection(p);
-            Route r2=tournamentSelection(p);
-            Route ch= crossover(r1,r2);
-            population.getRoutes().set(i,ch);
+        for (int i = eliteIndx; i < p.getPopulationSize(); i++) {
+            Route r1 = tournamentSelection(p);
+            Route r2 = tournamentSelection(p);
+            Route ch = crossover(r1, r2);
+            population.getRoutes().set(i, ch);
         }
         for (int i = eliteIndx; i < population.getPopulationSize(); i++) {
             mutate(population.getRoutes().get(i));
@@ -72,9 +72,9 @@ public class GeneticAlgorithm {
             child.getRoute().set(i, r1.getRoute().get(i));
         }
         for (int i = 0; i < r2.getRoute().size(); i++) {
-            if(!child.getRoute().contains(r2.getRoute().get(i)))
+            if (!child.getRoute().contains(r2.getRoute().get(i)))
                 for (int j = 0; j < child.getRoute().size(); j++) {
-                    if(child.getRoute().toArray()[j]==null) {
+                    if (child.getRoute().toArray()[j] == null) {
                         child.getRoute().set(j, r2.getRoute().get(i));
                         break;
                     }
@@ -84,22 +84,22 @@ public class GeneticAlgorithm {
         return child;
     }
 
-    private void mutate(Route route){
+    private void mutate(Route route) {
         for (int i = 0; i < route.getRoute().size(); i++) {
-            if(Math.random()<mutationRate) {
-                int j =(int) (Math.random()*route.getRoute().size());
-                Collections.swap(route.getRoute(),i,j);
+            if (Math.random() < mutationRate) {
+                int j = (int) (Math.random() * route.getRoute().size());
+                Collections.swap(route.getRoute(), i, j);
             }
         }
         route.calculateRouteDistance();
     }
 
     private Route tournamentSelection(Population population) {
-        Population tournamnetPopulation= new Population(tournamentSize);
-        for (int i = 0; i <tournamentSize ; i++) {
-            tournamnetPopulation.getRoutes().set(i,population.getRoutes().get((int)(Math.random()*population.getPopulationSize())));
+        Population tournamnetPopulation = new Population(tournamentSize);
+        for (int i = 0; i < tournamentSize; i++) {
+            tournamnetPopulation.getRoutes().set(i, population.getRoutes().get((int) (Math.random() * population.getPopulationSize())));
         }
-        Route route= tournamnetPopulation.getBestRoute();
+        Route route = tournamnetPopulation.getBestRoute();
         route.calculateRouteDistance();
         return route;
     }

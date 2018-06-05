@@ -9,26 +9,26 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Population{
+public class Population {
     private List<Route> routes;
     private int populationSize;
 
     public Population(int populationSize) {
-        this.populationSize=populationSize;
-        routes=new ArrayList<>();
-        for (int i = 0; i <populationSize ; i++) {
+        this.populationSize = populationSize;
+        routes = new ArrayList<>();
+        for (int i = 0; i < populationSize; i++) {
             routes.add(new Route());
         }
     }
 
-    public void generateRoutes(){
-        for (int i = 0; i <populationSize ; i++) {
-            Route route= new Route();
-            List<City> list=new ArrayList<City>(Arrays.asList(CitiesStorage.getCities()));
+    public void generateRoutes() {
+        for (int i = 0; i < populationSize; i++) {
+            Route route = new Route();
+            List<City> list = new ArrayList<City>(Arrays.asList(CitiesStorage.getCities()));
             Collections.shuffle(list);
             route.setRoute(list);
             route.calculateRouteDistance();
-            routes.set(i,route);
+            routes.set(i, route);
         }
     }
 
@@ -49,10 +49,10 @@ public class Population{
     }
 
     public Route getBestRoute() {
-        Route route=routes.get(0);
-        for (int i = 0; i <populationSize ; i++) {
-            if(routes.get(i).getDistance()<route.getDistance())
-                route=routes.get(i);
+        Route route = routes.get(0);
+        for (int i = 0; i < populationSize; i++) {
+            if (routes.get(i).getDistance() < route.getDistance())
+                route = routes.get(i);
         }
         return route;
     }

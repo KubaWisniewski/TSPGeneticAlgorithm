@@ -13,28 +13,28 @@ public class NearestNeighbourAlgorithm {
     private Route route;
 
     public NearestNeighbourAlgorithm() {
-        unvisitedCities=new ArrayList<>(Arrays.asList(CitiesStorage.getCities()));
-        route=new Route();
+        unvisitedCities = new ArrayList<>(Arrays.asList(CitiesStorage.getCities()));
+        route = new Route();
     }
 
     public void solveTSP() {
-        int random=(int)( Math.random()*unvisitedCities.size());
-        route.getRoute().set(0,unvisitedCities.get(random));
+        int random = (int) (Math.random() * unvisitedCities.size());
+        route.getRoute().set(0, unvisitedCities.get(random));
         unvisitedCities.remove(random);
         //route.getRoute().set(0,c);
         //unvisitedCities.remove(c);
-        for (int i = 1; !unvisitedCities.isEmpty() ; i++) {
-            int indexNearest =getIdxNearest(route.getRoute().get(i-1),unvisitedCities);
-            route.getRoute().set(i,unvisitedCities.get(indexNearest));
+        for (int i = 1; !unvisitedCities.isEmpty(); i++) {
+            int indexNearest = getIdxNearest(route.getRoute().get(i - 1), unvisitedCities);
+            route.getRoute().set(i, unvisitedCities.get(indexNearest));
             unvisitedCities.remove(indexNearest);
         }
         route.calculateRouteDistance();
     }
 
     public int getIdxNearest(City city, List<City> cities) {
-        int idx=0;
-        double distance=city.getDistanceTo(cities.get(0));
-        for (int i = 1; i <cities.size() ; i++){
+        int idx = 0;
+        double distance = city.getDistanceTo(cities.get(0));
+        for (int i = 1; i < cities.size(); i++) {
             if (city.getDistanceTo(cities.get(i)) < distance) {
                 distance = city.getDistanceTo(cities.get(i));
                 idx = i;
@@ -61,6 +61,6 @@ public class NearestNeighbourAlgorithm {
 
     @Override
     public String toString() {
-        return "Distance: "+ route.getDistance();
+        return "Distance: " + route.getDistance();
     }
 }

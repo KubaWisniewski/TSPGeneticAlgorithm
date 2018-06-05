@@ -32,8 +32,8 @@ public class City {
 
     public double getDistanceTo(City city) {
         return Math.sqrt(
-                ((this.getX()-city.getX())*(this.getX()-city.getX()))+
-                        ((this.getY()-city.getY())*(this.getY()-city.getY()))
+                ((this.getX() - city.getX()) * (this.getX() - city.getX())) +
+                        ((this.getY() - city.getY()) * (this.getY() - city.getY()))
         );
     }
 
@@ -53,6 +53,6 @@ public class City {
 
     @Override
     public String toString() {
-        return "x=" + x + ", y=" + y +"\n";
+        return "x=" + x + ", y=" + y + "\n";
     }
 }
